@@ -73,7 +73,7 @@ bool CEGLNativeTypeAndroid::CreateNativeDisplay()
   return true;
 }
 
-bool CEGLNativeTypeAndroid::CreateNativeWindow()
+bool CEGLNativeTypeAndroid::CreateNativeWindow(int)
 {
 #if defined(TARGET_ANDROID)
   // Android hands us a window, we don't have to create it
@@ -169,3 +169,4 @@ bool CEGLNativeTypeAndroid::ShowWindow(bool show)
 {
   return false;
 }
+
