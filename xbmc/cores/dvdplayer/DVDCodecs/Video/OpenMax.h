@@ -105,7 +105,7 @@ protected:
   // OpenMax state tracking
   OMX_CLIENT_STATE  m_omx_client_state;
   volatile int      m_omx_decoder_state;
-  sem_t             *m_omx_decoder_state_change;
+  sem_t             m_omx_decoder_state_change;
   std::vector<omx_codec_capability> m_omx_decoder_capabilities;
 
 private:

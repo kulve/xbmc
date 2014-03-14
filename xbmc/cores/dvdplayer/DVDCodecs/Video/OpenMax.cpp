@@ -105,7 +105,7 @@ COpenMax::COpenMax()
   m_omx_decoder = NULL;
   m_omx_client_state = DEAD;
   m_omx_decoder_state = 0;
-  sem_init(m_omx_decoder_state_change, 0, 0);
+  sem_init(&m_omx_decoder_state_change, 0, 0);
   /*
   m_omx_flush_input  = (sem_t*)malloc(sizeof(sem_t));
   sem_init(m_omx_flush_input, 0, 0);
@@ -119,6 +119,7 @@ COpenMax::~COpenMax()
   #if defined(OMX_DEBUG_VERBOSE)
   CLog::Log(LOGDEBUG, "%s::%s\n", CLASSNAME, __func__);
   #endif
+  sem_destroy(&m_omx_decoder_state_change);
   /*
   sem_destroy(m_omx_flush_input);
   free(m_omx_flush_input);
@@ -182,7 +183,7 @@ OMX_ERRORTYPE COpenMax::WaitForState(OMX_STATETYPE state)
   {
     clock_gettime(CLOCK_REALTIME, &timeout);
     timeout.tv_sec += 1;
-    sem_timedwait(m_omx_decoder_state_change, &timeout);
+    sem_timedwait(&m_omx_decoder_state_change, &timeout);
     if (errno == ETIMEDOUT)
       tries++;
     if (tries > 5)

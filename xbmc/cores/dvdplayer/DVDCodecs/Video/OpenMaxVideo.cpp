@@ -84,8 +84,6 @@ COpenMaxVideo::COpenMaxVideo()
   pthread_mutex_init(&m_omx_input_mutex, NULL);
   pthread_mutex_init(&m_omx_output_mutex, NULL);
 
-  m_omx_decoder_state_change = (sem_t*)malloc(sizeof(sem_t));
-  sem_init(m_omx_decoder_state_change, 0, 0);
   memset(&m_videobuffer, 0, sizeof(DVDVideoPicture));
   m_drop_state = false;
   m_decoded_width = 0;
@@ -106,8 +104,6 @@ COpenMaxVideo::~COpenMaxVideo()
     Close();
   pthread_mutex_destroy(&m_omx_input_mutex);
   pthread_mutex_destroy(&m_omx_output_mutex);
-  sem_destroy(m_omx_decoder_state_change);
-  free(m_omx_decoder_state_change);
 }
 
 bool COpenMaxVideo::Open(CDVDStreamInfo &hints)
@@ -831,7 +827,7 @@ OMX_ERRORTYPE COpenMaxVideo::DecoderEventHandler(
                 CLASSNAME, __func__, ctx->m_omx_decoder_state);
             break;
           }
-          sem_post(ctx->m_omx_decoder_state_change);
+          sem_post(&ctx->m_omx_decoder_state_change);
         break;
         case OMX_CommandFlush:
           /*
@@ -970,7 +966,7 @@ OMX_ERRORTYPE COpenMaxVideo::DecoderEventHandler(
       sem_post(ctx->m_omx_flush_input);
       sem_post(ctx->m_omx_flush_output);
       */
-      sem_post(ctx->m_omx_decoder_state_change);
+      sem_post(&ctx->m_omx_decoder_state_change);
     break;
     default:
       CLog::Log(LOGWARNING,
