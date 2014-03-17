@@ -142,6 +142,7 @@ bool COpenMaxVideo::Open(CDVDStreamInfo &hints)
           decoder_name = OMX_H264HIGH_DECODER;
         break;
         default:
+          CLog::Log(LOGWARNING, "%s::%s: unknown hints.profile: %d\n", CLASSNAME, __func__, hints.profile);
           return false;
         break;
       }
@@ -172,6 +173,7 @@ bool COpenMaxVideo::Open(CDVDStreamInfo &hints)
       decoder_name = OMX_VC1_DECODER;
     break;
     default:
+      CLog::Log(LOGWARNING, "%s::%s: unknown hints.codec: %d\n", CLASSNAME, __func__, hints.codec);
       return false;
     break;
   }
