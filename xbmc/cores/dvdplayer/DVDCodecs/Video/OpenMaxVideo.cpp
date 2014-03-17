@@ -874,6 +874,10 @@ OMX_ERRORTYPE COpenMaxVideo::DecoderEventHandler(
             // Got OMX_CommandPortDisable event, alloc new buffers for the output port.
             ctx->AllocOMXOutputBuffers();
             omx_err = OMX_SendCommand(ctx->m_omx_decoder, OMX_CommandPortEnable, ctx->m_omx_output_port, NULL);
+            if (omx_err != OMX_ErrorNone) {
+              CLog::Log(LOGWARNING, "%s::%s - OMX_SendCommand failed, error: %d\n",
+                        CLASSNAME, __func__, omx_err);
+            }
           }
         break;
         case OMX_CommandPortEnable:
@@ -930,6 +934,10 @@ OMX_ERRORTYPE COpenMaxVideo::DecoderEventHandler(
         ctx->m_portChanging = true;
         OMX_SendCommand(ctx->m_omx_decoder, OMX_CommandPortDisable, ctx->m_omx_output_port, NULL);
         omx_err = ctx->FreeOMXOutputBuffers(false);
+        if (omx_err != OMX_ErrorNone) {
+          CLog::Log(LOGWARNING, "%s::%s - OMX_SendCommand failed, error: %d\n",
+                    CLASSNAME, __func__, omx_err);
+        }
       }
     break;
     #if defined(OMX_DEBUG_EVENTHANDLER)
