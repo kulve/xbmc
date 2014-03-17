@@ -124,6 +124,8 @@ bool COpenMaxVideo::Open(CDVDStreamInfo &hints)
     {
       switch(hints.profile)
       {
+        case 578:
+          CLog::Log(LOGWARNING, "%s::%s: Profile 578, assuming Baseline\n", CLASSNAME, __func__);
         case FF_PROFILE_H264_BASELINE:
           // (role name) video_decoder.avc
           // H.264 Baseline profile
