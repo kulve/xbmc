@@ -30,6 +30,7 @@
 #include "DVDVideoCodecOpenMax.h"
 #include "OpenMaxVideo.h"
 #include "utils/log.h"
+#include "settings/Settings.h"
 
 #define CLASSNAME "COpenMax"
 ////////////////////////////////////////////////////////////////////////////////////////////

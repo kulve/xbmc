@@ -24,6 +24,8 @@
 #include "OpenMax.h"
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
 
 // an omx egl video frame
 typedef struct OpenMaxVideoBuffer {
