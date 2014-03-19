@@ -59,14 +59,14 @@ public:
   virtual bool  ClampToGUIDisplayLimits(int &width, int &height);
 
   EGLConfig     GetEGLConfig();
+  EGLDisplay    GetEGLDisplay();
+  EGLContext    GetEGLContext();
 
 protected:
   virtual bool  PresentRenderImpl(const CDirtyRegionList &dirty);
   virtual void  SetVSyncImpl(bool enable);
 
   bool          CreateWindow(RESOLUTION_INFO &res);
-  EGLDisplay    GetEGLDisplay();
-  EGLContext    GetEGLContext();
 
   int                   m_displayWidth;
   int                   m_displayHeight;
