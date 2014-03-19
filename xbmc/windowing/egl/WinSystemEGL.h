@@ -59,6 +59,8 @@ public:
   virtual bool  ClampToGUIDisplayLimits(int &width, int &height);
 
   EGLConfig     GetEGLConfig();
+  EGLDisplay    GetEGLDisplay();
+  EGLContext    GetEGLContext();
 
   EGLDisplay    GetEGLDisplay();
   EGLContext    GetEGLContext();
