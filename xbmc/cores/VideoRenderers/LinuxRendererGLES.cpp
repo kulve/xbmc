@@ -1354,11 +1354,11 @@ void CLinuxRendererGLES::RenderOpenMax(int index, int field)
     ver[i][3] = 1.0f;
   }
 
-  // Set texture coordinates
-  tex[0][0] = tex[3][0] = 0;
-  tex[0][1] = tex[1][1] = 0;
-  tex[1][0] = tex[2][0] = 1;
-  tex[2][1] = tex[3][1] = 1;
+  // Set texture coordinates (MediaCodec is flipped in y)
+  tex[0][0] = tex[3][0] = 0.0f;
+  tex[0][1] = tex[1][1] = 1.0f;
+  tex[1][0] = tex[2][0] = 1.0f;
+  tex[2][1] = tex[3][1] = 0.0f;
 
   glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, idx);
 
