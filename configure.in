@@ -1968,11 +1968,11 @@ elif test "$target_platform" = "target_raspberry_pi"; then
   AC_MSG_NOTICE($openmax_disabled)
 else
   if test "$use_gles" = "yes" && test "$use_openmax" = "auto"; then
-    PKG_CHECK_MODULES([OPENMAX], [libomxil-bellagio],
+    PKG_CHECK_MODULES([OPENMAX], [omxil-tegra],
                       USE_OPENMAX=1;[INCLUDES="$INCLUDES $OPENMAX_CFLAGS"; LIBS="$LIBS $OPENMAX_LIBS"],
                       use_openmax=no;USE_OPENMAX=0;AC_MSG_RESULT($openmax_not_found))
   elif test "$use_gles" = "yes" && test "$use_openmax" = "yes"; then
-    PKG_CHECK_MODULES([OPENMAX], [libomxil-bellagio],
+    PKG_CHECK_MODULES([OPENMAX], [omxil-tegra],
                       USE_OPENMAX=1;[INCLUDES="$INCLUDES $OPENMAX_CFLAGS"; LIBS="$LIBS $OPENMAX_LIBS"],
                       AC_MSG_ERROR($openmax_not_found))
   else
