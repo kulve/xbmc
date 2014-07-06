@@ -503,6 +503,13 @@ bool CWinSystemX11::IsCurrentOutput(CStdString output)
 EGLConfig getEGLConfig(EGLDisplay eglDisplay, XVisualInfo *vInfo)
 {
   EGLint attributes[] = {
+    EGL_RED_SIZE, 8,
+    EGL_GREEN_SIZE, 8,
+    EGL_BLUE_SIZE, 8,
+    EGL_ALPHA_SIZE, 8,
+    EGL_BUFFER_SIZE, 32,
+    EGL_DEPTH_SIZE, 16,
+    EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
     EGL_NONE
   };
   EGLint numConfigs;
@@ -570,7 +577,7 @@ bool CWinSystemX11::IsSuitableVisual(XVisualInfo *vInfo)
     return false;
   if (!eglGetConfigAttrib(m_eglDisplay, config, EGL_ALPHA_SIZE, &value) || value < 8)
     return false;
-  if (!eglGetConfigAttrib(m_eglDisplay, config, EGL_DEPTH_SIZE, &value) || value < 24)
+  if (!eglGetConfigAttrib(m_eglDisplay, config, EGL_DEPTH_SIZE, &value) || value < 16)
     return false;
  
 #endif
@@ -1029,7 +1036,7 @@ bool CWinSystemX11::SetWindow(int width, int height, bool fullscreen, const std:
       EGL_BLUE_SIZE, 8,
       EGL_ALPHA_SIZE, 8,
       EGL_BUFFER_SIZE, 32,
-      EGL_DEPTH_SIZE, 24,
+      EGL_DEPTH_SIZE, 16,
       EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
       EGL_NONE
     };
